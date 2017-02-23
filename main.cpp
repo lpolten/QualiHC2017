@@ -67,48 +67,48 @@ VideoStream::VideoStream(char *file)
    ss >> _num_servers;
    ss >> _capacity;
 
-   cout << "Basic" << endl;
+   //cout << "Basic" << endl;
 
-   cout << _num_vids << " " << _num_endpts << " " << _num_requests << " " << _num_servers << " " << _capacity << endl;
+   //cout << _num_vids << " " << _num_endpts << " " << _num_requests << " " << _num_servers << " " << _capacity << endl;
 
    getline(filestream, line);
    stringstream ss2(line);
 
-   cout << "Vid sizes" << endl;
+   //cout << "Vid sizes" << endl;
 
    _vid_size.reserve(_num_vids);
    size_t tmp;
    for (size_t i = 0; i < _num_vids; ++i)
    {
       ss2 >> tmp;
-      cout << tmp << endl;
+      //cout << tmp << endl;
       _vid_size.push_back(tmp);
    }
 
-   cout << "endpts" << endl;
+   //cout << "endpts" << endl;
 
    size_t latency, num_connections;
    size_t cache_id, cache_latency;
    _endpts.reserve(_num_endpts);
    for (size_t i = 0; i < _num_endpts; ++i)
    {
-      cout << "new endpt" << endl;
+      //cout << "new endpt" << endl;
       getline(filestream, line);
       ss2.str(line);
       ss2.clear();
       ss2 >> latency;
       ss2 >> num_connections;
-      cout << "   " << latency << " " << num_connections << endl;
+      //cout << "   " << latency << " " << num_connections << endl;
       Endpoint new_endpt(latency, num_connections);
       for (size_t j = 0; j < num_connections; ++j)
       {
-         cout << "   new connection" << endl;
+         //cout << "   new connection" << endl;
          getline(filestream, line);
          ss2.str(line);
          ss2.clear();
          ss2 >> cache_id;
          ss2 >> cache_latency;
-         cout << "      " << cache_id << " " << cache_latency << endl;
+         //cout << "      " << cache_id << " " << cache_latency << endl;
          new_endpt._cache_connections[j] = cache_id;
          new_endpt._cache_latency[j] = cache_latency;
       }
@@ -116,7 +116,7 @@ VideoStream::VideoStream(char *file)
       _endpts.push_back(new_endpt);
    }
 
-   cout << "requests" << endl;
+   //cout << "requests" << endl;
    size_t vid_id, endpt_id, num_requests;
    _requests.reserve(_num_requests);
    for (size_t i = 0; i < _num_requests; ++i)
@@ -127,7 +127,7 @@ VideoStream::VideoStream(char *file)
       ss2 >> vid_id;
       ss2 >> endpt_id;
       ss2 >> num_requests;
-      cout << vid_id << " " << endpt_id << " " << num_requests << endl;
+      //cout << vid_id << " " << endpt_id << " " << num_requests << endl;
       Request new_req(vid_id, endpt_id, num_requests);
       _requests.push_back(new_req);
    }
