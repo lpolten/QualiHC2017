@@ -95,6 +95,7 @@ VideoStream::VideoStream(char *file)
          new_endpt._cache_connections[j] = cache_id;
          new_endpt._cache_latency[j] = cache_latency;
       }
+      
       _endpts.push_back(new_endpt);
    }
 
